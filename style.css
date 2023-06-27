@@ -1,0 +1,15 @@
+#header{
+    text-align: center;
+    font-family: Playfair Display;
+}
+
+#body{
+    background-color: rgb(72, 96, 146);
+    color: white
+}
+
+.container{
+    text-align:center;
+    font-family: Playfair Display;
+    font-size: 1.3rem;
+}
