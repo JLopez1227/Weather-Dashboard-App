@@ -13,3 +13,12 @@
     font-family: Playfair Display;
     font-size: 1.3rem;
 }
+
+.forecastItem{
+    width: 20%;
+    border: 2px solid black;
+}
+
+#fiveDayForecast{
+    display: flex;
+}
