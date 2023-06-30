@@ -4,15 +4,17 @@ var latitude = "";
 var longitude = "";
 var searchInput = document.getElementById("searchInput");
 var searchButton = document.getElementById("searchButton");
-const fiveDayDiv = document.getElementById("fiveDayForecast");
+
 
 function fiveDayWeather(fiveDayData) {
   const forecastArray = fiveDayData.list;
+  const fiveDayDiv = document.getElementById("fiveDayForecast");
+  fiveDayDiv.innerHTML = '';
 
   for (let index = 0; index < forecastArray.length; index += 8) {
     const fiveDay = forecastArray[index];
     const displayForecast = document.createElement("div");
-    displayForecast.classList.add('forecastItem')
+    displayForecast.classList.add("forecastItem");
     const displayDate = document.createElement("h4");
     const displayHumidity = document.createElement("p");
     const displayWindSpeed = document.createElement("p");
@@ -28,9 +30,9 @@ function fiveDayWeather(fiveDayData) {
     const temp = fiveDay.main.temp;
 
     displayDate.textContent = date;
-    displayHumidity.textContent = "Humidity: " + humidity + '%';
-    displayWindSpeed.textContent = "Wind Speed: " + windSpeed + 'MPH';
-    displayTemp.textContent = "Temperature: " + temp + '°';
+    displayHumidity.textContent = "Humidity: " + humidity + "%";
+    displayWindSpeed.textContent = "Wind Speed: " + windSpeed + "MPH";
+    displayTemp.textContent = "Temperature: " + temp + "°";
     displayForecast.appendChild(displayDate);
     displayForecast.appendChild(displayHumidity);
     displayForecast.appendChild(displayWindSpeed);
@@ -44,13 +46,14 @@ function fiveDayWeather(fiveDayData) {
 }
 
 function singleDayWeather(singleDayData) {
-  console.log(singleDayData)
+  console.log(singleDayData);
   const currentDay = document.getElementById("currentDiv");
+  currentDay.innerHTML = '';
   const displayHumidity = document.createElement("p");
   const displayWindSpeed = document.createElement("p");
   const displayTemp = document.createElement("p");
   const displayDate = document.createElement("p");
-  
+
   const date = new Date(singleDayData.dt * 1000).toLocaleDateString();
   const humidity = singleDayData.main.humidity;
   const windSpeed = singleDayData.wind.speed;
@@ -60,20 +63,41 @@ function singleDayWeather(singleDayData) {
   var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
   iconEl.setAttribute("src", iconUrl);
 
-  displayDate.textContent = 'Date: ' + date
-  displayHumidity.textContent = 'Humidity: ' + humidity + '%'
-  displayTemp.textContent = 'Temperature: ' + temp + '°'
-  displayWindSpeed.textContent = 'Wind Speed: ' + windSpeed + 'MPH'
+  displayDate.textContent = "Date: " + date;
+  displayHumidity.textContent = "Humidity: " + humidity + "%";
+  displayTemp.textContent = "Temperature: " + temp + "°";
+  displayWindSpeed.textContent = "Wind Speed: " + windSpeed + "MPH";
 
-  currentDay.appendChild(displayDate)
-  currentDay.appendChild(displayHumidity)
-  currentDay.appendChild(displayWindSpeed)
-  currentDay.appendChild(displayTemp)
+  currentDay.appendChild(displayDate);
+  currentDay.appendChild(displayHumidity);
+  currentDay.appendChild(displayWindSpeed);
+  currentDay.appendChild(displayTemp);
 }
+
+function displayCityHistory() {
+  var storage = localStorage.getItem("cities");
+  var cities = JSON.parse(storage) || [];
+  const citiesDiv = document.getElementById('cityHistory')
+  citiesDiv.innerHTML= ''
+  for (let i = 0; i < cities.length; i++) {
+    const city = cities[i];
+    const btn = document.createElement('button');
+    btn.textContent = city
+    citiesDiv.appendChild(btn);
+  }
+}
+  displayCityHistory();
 
 function testWeather() {
   var inputValue = searchInput.value;
   var city = inputValue;
+  //add to local storage
+  var storage = localStorage.getItem("cities");
+  var cities = JSON.parse(storage) || [];
+  cities.push(city)
+  var stringifyStorage = JSON.stringify(cities);
+  localStorage.setItem('cities', stringifyStorage)
+  displayCityHistory();
   var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     city +
@@ -121,7 +145,6 @@ function testWeather() {
             .then(function (forecastData) {
               console.log(forecastData);
               fiveDayWeather(forecastData);
-              singleDayWeather(forecastData);
             });
         });
     });
