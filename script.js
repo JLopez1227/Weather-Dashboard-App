@@ -75,6 +75,7 @@ function singleDayWeather(singleDayData) {
   currentDay.appendChild(displayHumidity);
   currentDay.appendChild(displayWindSpeed);
   currentDay.appendChild(displayTemp);
+  currentDay.appendChild(iconEl);
 }
 
 function displayCityHistory() {
@@ -85,8 +86,10 @@ function displayCityHistory() {
   for (let i = 0; i < cities.length; i++) {
     const city = cities[i];
     const btn = document.createElement('button');
+    btn.classList.add('cityBtn')
     btn.textContent = city
     citiesDiv.appendChild(btn);
+
   }
 }
   displayCityHistory();

@@ -1,6 +1,7 @@
 #header {
   text-align: center;
   font-family: Playfair Display;
+  border-bottom: double 5px black;
 }
 
 #body {
@@ -31,17 +32,18 @@
 }
 
 #searchInput{
-    overflow: hidden;
+  overflow: hidden;
   background-color: black;
   color: white;
+  border: double 3px white;
   font-family: Playfair Display;
   font-size: 1rem;
-
+  cursor: pointer;
 }
 
 .forecastItem {
   width: 20%;
-  border: 2px solid black;
+  border: 2px double white;
   background-color: black;
   color: white; 
 }
@@ -55,7 +57,7 @@
   display: flexbox;
   width: 35%;
   font-size: 1.5rem;
-  border: 2px solid black;
+  border: 2px double white;
   justify-content: space-between;
   text-align: center;
   background-color: black;
@@ -67,7 +69,7 @@
 .header {
   text-align: center;
   font-family: Playfair Display;
-  border: 2px solid black;
+  border: 2px double white;
   background-color: black;
   color: white;
 }
@@ -87,4 +89,27 @@
 #searchButton:hover {
   background-color: white;
   color: black;
+}
+
+#cityHistory{
+  border: 5px double black;
+  width: 15%;
+  display: column;
+  justify-content: space-between;
+}
+
+.cityBtn{
+  transition-duration: 0.4s;
+  background-color: rgb(141, 78, 156);
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  font-size: 10px;
+  cursor: pointer;
+  font-family: Playfair Display;
+}
+
+.cityBtn:hover{
+  background-color: white;
+  color: rgb(141, 78, 156);
 }
