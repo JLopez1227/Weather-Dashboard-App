@@ -159,3 +159,7 @@ function testWeather() {
 searchButton.addEventListener("click", function () {
   testWeather();
 });
+
+// btn.addEventListener('click', function(){
+  //add function to pull up previous search data
+// })
