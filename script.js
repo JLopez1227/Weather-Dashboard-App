@@ -40,13 +40,10 @@ function fiveDayWeather(fiveDayData) {
     displayForecast.appendChild(iconEl);
 
     fiveDayDiv.appendChild(displayForecast);
-
-    console.log(fiveDay);
   }
 }
 
 function singleDayWeather(singleDayData) {
-  console.log(singleDayData);
   const currentDay = document.getElementById("currentDiv");
   currentDay.innerHTML = "";
   const displayHumidity = document.createElement("p");
@@ -96,7 +93,6 @@ function displayCityHistory() {
     });
   }
 }
-// displayCityHistory();
 
 function testWeather(btnCity) {
   var inputValue = searchInput.value;
@@ -122,11 +118,10 @@ function testWeather(btnCity) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       latitude = data.coord.lat;
-      console.log(latitude);
+
       longitude = data.coord.lon;
-      console.log(longitude);
+
       var coordinateURL =
         "https://api.openweathermap.org/data/2.5/weather?lat=" +
         latitude +
@@ -154,7 +149,6 @@ function testWeather(btnCity) {
               return response.json();
             })
             .then(function (forecastData) {
-              console.log(forecastData);
               fiveDayWeather(forecastData);
             });
         });
