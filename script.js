@@ -4,12 +4,12 @@ var latitude = "";
 var longitude = "";
 var searchInput = document.getElementById("searchInput");
 var searchButton = document.getElementById("searchButton");
-
+var searchHistory = [];
 
 function fiveDayWeather(fiveDayData) {
   const forecastArray = fiveDayData.list;
   const fiveDayDiv = document.getElementById("fiveDayForecast");
-  fiveDayDiv.innerHTML = '';
+  fiveDayDiv.innerHTML = "";
 
   for (let index = 0; index < forecastArray.length; index += 8) {
     const fiveDay = forecastArray[index];
@@ -48,12 +48,12 @@ function fiveDayWeather(fiveDayData) {
 function singleDayWeather(singleDayData) {
   console.log(singleDayData);
   const currentDay = document.getElementById("currentDiv");
-  currentDay.innerHTML = '';
+  currentDay.innerHTML = "";
   const displayHumidity = document.createElement("p");
   const displayWindSpeed = document.createElement("p");
   const displayTemp = document.createElement("p");
   const displayDate = document.createElement("p");
-  const todayForecast = document.createElement('h2');
+  const todayForecast = document.createElement("h2");
 
   const date = new Date(singleDayData.dt * 1000).toLocaleDateString();
   const humidity = singleDayData.main.humidity;
@@ -68,9 +68,9 @@ function singleDayWeather(singleDayData) {
   displayHumidity.textContent = "Humidity: " + humidity + "%";
   displayTemp.textContent = "Temperature: " + temp + " °F";
   displayWindSpeed.textContent = "Wind Speed: " + windSpeed + " MPH";
-  todayForecast.textContent = "Today's Forecast:"
+  todayForecast.textContent = "Today's Forecast:";
 
-  currentDay.appendChild(todayForecast)
+  currentDay.appendChild(todayForecast);
   currentDay.appendChild(displayDate);
   currentDay.appendChild(displayHumidity);
   currentDay.appendChild(displayWindSpeed);
@@ -80,29 +80,34 @@ function singleDayWeather(singleDayData) {
 
 function displayCityHistory() {
   var storage = localStorage.getItem("cities");
-  var cities = JSON.parse(storage) || [];
-  const citiesDiv = document.getElementById('cityHistory')
-  citiesDiv.innerHTML= ''
+  var cities = JSON.parse(storage) || searchHistory;
+  const citiesDiv = document.getElementById("cityHistory");
+  citiesDiv.innerHTML = "";
   for (let i = 0; i < cities.length; i++) {
     const city = cities[i];
-    const btn = document.createElement('button');
-    btn.classList.add('cityBtn')
-    btn.textContent = city
+    const btn = document.createElement("button");
+    btn.classList.add("cityBtn");
+    btn.textContent = city;
     citiesDiv.appendChild(btn);
 
+    btn.addEventListener("click", function (event) {
+      var btnCity = event.target.innerText;
+      testWeather(btnCity);
+    });
   }
 }
-  displayCityHistory();
+// displayCityHistory();
 
-function testWeather() {
+function testWeather(btnCity) {
   var inputValue = searchInput.value;
-  var city = inputValue;
+  var city = btnCity || inputValue;
+
   //add to local storage
   var storage = localStorage.getItem("cities");
-  var cities = JSON.parse(storage) || [];
-  cities.push(city)
+  var cities = JSON.parse(storage) || searchHistory;
+  cities.push(city);
   var stringifyStorage = JSON.stringify(cities);
-  localStorage.setItem('cities', stringifyStorage)
+  localStorage.setItem("cities", stringifyStorage);
   displayCityHistory();
   var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -160,6 +165,11 @@ searchButton.addEventListener("click", function () {
   testWeather();
 });
 
-// btn.addEventListener('click', function(){
-  //add function to pull up previous search data
-// })
+function innit() {
+  var storedCity = JSON.parse(localStorage.getItem("cities"));
+  if (storedCity !== null) {
+    searchHistory = storedCity;
+  }
+  displayCityHistory();
+}
+innit();
