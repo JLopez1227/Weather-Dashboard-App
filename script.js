@@ -31,8 +31,8 @@ function fiveDayWeather(fiveDayData) {
 
     displayDate.textContent = date;
     displayHumidity.textContent = "Humidity: " + humidity + "%";
-    displayWindSpeed.textContent = "Wind Speed: " + windSpeed + "MPH";
-    displayTemp.textContent = "Temperature: " + temp + "°";
+    displayWindSpeed.textContent = "Wind Speed: " + windSpeed + " MPH";
+    displayTemp.textContent = "Temperature: " + temp + " °F";
     displayForecast.appendChild(displayDate);
     displayForecast.appendChild(displayHumidity);
     displayForecast.appendChild(displayWindSpeed);
@@ -53,6 +53,7 @@ function singleDayWeather(singleDayData) {
   const displayWindSpeed = document.createElement("p");
   const displayTemp = document.createElement("p");
   const displayDate = document.createElement("p");
+  const todayForecast = document.createElement('h2');
 
   const date = new Date(singleDayData.dt * 1000).toLocaleDateString();
   const humidity = singleDayData.main.humidity;
@@ -65,9 +66,11 @@ function singleDayWeather(singleDayData) {
 
   displayDate.textContent = "Date: " + date;
   displayHumidity.textContent = "Humidity: " + humidity + "%";
-  displayTemp.textContent = "Temperature: " + temp + "°";
-  displayWindSpeed.textContent = "Wind Speed: " + windSpeed + "MPH";
+  displayTemp.textContent = "Temperature: " + temp + " °F";
+  displayWindSpeed.textContent = "Wind Speed: " + windSpeed + " MPH";
+  todayForecast.textContent = "Today's Forecast:"
 
+  currentDay.appendChild(todayForecast)
   currentDay.appendChild(displayDate);
   currentDay.appendChild(displayHumidity);
   currentDay.appendChild(displayWindSpeed);

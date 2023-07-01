@@ -1,24 +1,90 @@
-#header{
-    text-align: center;
+#header {
+  text-align: center;
+  font-family: Playfair Display;
+}
+
+#body {
+  background-color: white;
+  color: black;
+}
+
+.container {
+  text-align: center;
+  font-family: Playfair Display;
+  font-size: 1.3rem;
+}
+
+.card-text{
     font-family: Playfair Display;
+    font-size: 2.5rem;
+    border-bottom: 2px solid black;
+    width: 30%
 }
 
-#body{
-    background-color: rgb(72, 96, 146);
-    color: white
-}
-
-.container{
-    text-align:center;
+.card-title{
     font-family: Playfair Display;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    border-bottom: solid black;
+    background-color: white;
+    color: black;
+    width: 15%
 }
 
-.forecastItem{
-    width: 20%;
-    border: 2px solid black;
+#searchInput{
+    overflow: hidden;
+  background-color: black;
+  color: white;
+  font-family: Playfair Display;
+  font-size: 1rem;
+
 }
 
-#fiveDayForecast{
-    display: flex;
+.forecastItem {
+  width: 20%;
+  border: 2px solid black;
+  background-color: black;
+  color: white; 
+}
+
+#fiveDayForecast {
+  display: flex;
+  justify-content: space-between;
+}
+
+#currentDiv {
+  display: flexbox;
+  width: 35%;
+  font-size: 1.5rem;
+  border: 2px solid black;
+  justify-content: space-between;
+  text-align: center;
+  background-color: black;
+  color: white;
+  margin-left: 450px;
+}
+
+
+.header {
+  text-align: center;
+  font-family: Playfair Display;
+  border: 2px solid black;
+  background-color: black;
+  color: white;
+}
+
+#searchButton {
+  transition-duration: 0.4s;
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#searchButton:hover {
+  background-color: white;
+  color: black;
 }
